@@ -1,0 +1,43 @@
+query GetEmployees {
+  employees {
+    ...Employee
+  }
+}
+
+mutation CreateEmployee($employee: EmployeeInputType!) {
+  createEmployee(employee: $employee) {
+    ...Employee
+  }
+}
+
+fragment Employee on EmployeeType {
+  id
+  name
+  age
+  dob
+  isActive
+  departmentId
+}
+
+fragment UnSavedEmp on UnSavedEmployee {
+  employee {
+    ...Employee
+  }
+}
+query UnSavedEmployee {
+  unSavedEmployee @client {
+    id
+    employee {
+      ...Employee
+    }
+  }
+}
+
+mutation CreateEmployeeInCache($employee: EmployeeInputType!) {
+  createEmployeeInCache(employee: $employee) @client {
+    id
+    employee {
+      ...Employee
+    }
+  }
+}

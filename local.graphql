@@ -1,0 +1,19 @@
+type UnSavedEmployee {
+  id: Guid
+  employee: EmployeeType!
+}
+
+extend type AppQuery {
+  unSavedEmployee: UnSavedEmployee!
+}
+
+extend type AppMutation {
+  createEmployeeInCache(employee: EmployeeInputType!): UnSavedEmployee
+  resetEmployeeInCache: UnSavedEmployee
+}
+
+# updateInvestmentWithdrawalInCache(
+#     scenarioId: Guid!
+#     update: InvestmentWithdrawalInput!
+#): UnsavedInvestment
+# deleteInvestmentWithdrawalInCache(id: Guid!, isBondType: Boolean!, withdrawalEndDate: Date): UnsavedInvestment
