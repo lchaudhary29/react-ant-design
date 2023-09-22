@@ -29,18 +29,18 @@ export function EmployeeCreator({ prop = 'default value' }: EmployeeCreatorProps
   };
 
   //const { data: UnSavedEmployee } = useUnSavedEmployeeQuery();
-  const [createEmployeeInCache, { data: createdEmployeeInCache, loading: createLoadingCache, error: errorInCache }] = useCreateEmployeeInCacheMutation();
-  //const [createEmployee, { data: createdEmployee, loading: createLoading, error }] = useCreateEmployeeMutation(createMutationOptions);
+  //const [createEmployeeInCache, { data: createdEmployeeInCache, loading: createLoadingCache, error: errorInCache }] = useCreateEmployeeInCacheMutation();
+  const [createEmployee, { data: createdEmployee, loading: createLoading, error }] = useCreateEmployeeMutation(createMutationOptions);
 
   const onFinish = (values: EmployeeInputType) => {
     console.log(values)
     values.dob = moment(values.dob).format('YYYY-MM-DD');
-    //createEmployee({ variables: { employee: values } })
-    createEmployeeInCache({
-      variables: {
-        employee: values
-      }
-    })
+    createEmployee({ variables: { employee: values } })
+    // createEmployeeInCache({
+    //   variables: {
+    //     employee: values
+    //   }
+    // })
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -56,7 +56,7 @@ export function EmployeeCreator({ prop = 'default value' }: EmployeeCreatorProps
   return (
     <>
       {contextHolder}
-      <EmployeeForm formRef={formRef} onFinish={onFinish} onFinishFailed={onFinishFailed} createLoading={createLoadingCache} ></EmployeeForm >
+      <EmployeeForm formRef={formRef} onFinish={onFinish} onFinishFailed={onFinishFailed} createLoading={createLoading} ></EmployeeForm >
     </>);
 }
 
